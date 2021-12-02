@@ -4,6 +4,19 @@ import time
 import subprocess
 
 
+def file_types_in_path(path):
+    """
+    :param path: path to directory to process; no default
+    """
+    ftypes = []
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            ext = file.split('.')[-1]
+            if ext not in ftypes:
+                ftypes.append(ext)
+    return ftypes
+
+
 def count_files_to_process(path, extension_in=None):
     """
     :param path: path to directory to process; no default

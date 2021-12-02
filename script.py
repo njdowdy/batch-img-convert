@@ -10,6 +10,7 @@ iter_timer = 1
 
 if __name__ == "__main__":
     # entry point to the convert_image_directory function
+    # f.file_types_in_path(path)  # gives an idea of what extensions are in your path to process
     f.convert_image_directory(path,
                               extension_in=extension_in,
                               extension_out=extension_out,
