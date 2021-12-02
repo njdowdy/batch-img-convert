@@ -1,10 +1,11 @@
 from functions import functions as f
 
-path = 'input/test'
-extension_in = ['tif', 'jpg']
+path = './input/test'
+output_folder = './output/converted'
+
+extension_in = ['tif']
 extension_out = 'png'
-parent_suffix = '../../output/converted/'
-file_suffix = 'out'
+file_suffix = ''
 iter_timer = 1
 
 if __name__ == "__main__":
@@ -13,5 +14,5 @@ if __name__ == "__main__":
                               extension_in=extension_in,
                               extension_out=extension_out,
                               file_suffix=file_suffix,
-                              parent_suffix=parent_suffix,
+                              output_folder=output_folder,
                               iter_timer=iter_timer)

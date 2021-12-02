@@ -5,11 +5,11 @@ import subprocess
 
 
 def count_files_to_process(path, extension_in=None):
-    '''
+    """
     :param path: path to directory to process; no default
     :param extension_in: list of extensions to convert; other types will just be copied over; defaults to '.tif'
     :return: returns the number of items that will be processed
-    '''
+    """
     if extension_in is None:
         extension_in = ['.tif']  # default input extension
     i = 0
@@ -22,29 +22,27 @@ def count_files_to_process(path, extension_in=None):
 
 
 def convert_image_directory(path, extension_in=None, extension_out='.png', file_prefix='', file_suffix='out',
-                            parent_suffix='../../output/converted/', iter_timer=5):
-    '''
+                            output_folder='./output/converted/', iter_timer=5):
+    """
     :param path: path to directory to process; no default
     :param extension_in: list of extensions to convert; other types will just be copied over; defaults to '.tif'
     :param extension_out: image file type to convert into; defaults to '.png'
     :param file_prefix: custom prefix to add to each converted file; defaults to ''
     :param file_suffix: custom suffix to add to each converted file; defaults to 'out'
-    :param parent_suffix: custom folder to add processed files to; defaults to '../../output/converted/'
+    :param output_folder: custom folder to add processed files to; defaults to './output/converted/'
     :param iter_timer: number of iterations to print a time stamp of progress; defaults to 5 iterations
     :return: does not return any value
-    '''
+    """
     if extension_in is None:
         extension_in = ['.tif']  # default input extension
     if file_prefix:
         if file_prefix[-1] != '_':
-            prefix = file_prefix + '_'
+            file_prefix = file_prefix + '_'
     if file_suffix:
         if file_suffix[0] != '_':
             file_suffix = '_' + file_suffix
-    if parent_suffix[-1] != '/':
-        parent_suffix = parent_suffix + '/'
-    if parent_suffix[0] != '/':
-        parent_suffix = '/' + parent_suffix
+    if output_folder[-1] != '/':
+        output_folder = output_folder + '/'  # unix
     extension_in = ['.' + x if x[0] != '.' else x for x in extension_in]
     if extension_out[0] != '.':
         extension_out = '.' + extension_out
@@ -53,11 +51,9 @@ def convert_image_directory(path, extension_in=None, extension_out='.png', file_
     proc_count = 0
     for root, dirs, files in os.walk(path):
         for full_path in [root]:
-            parent = (full_path + '/').replace('//', '/')
-            converted_path = parent
-            if parent_suffix != '':
-                converted_path = (path + parent_suffix + parent.replace(path, '')).replace('//', '/')
-                os.makedirs(converted_path, exist_ok=True)
+            parent = (full_path + '/').replace('//', '/').replace('\\', '/')
+            converted_path = output_folder[0:-1] + parent.replace(path, '')
+            os.makedirs(converted_path, exist_ok=True)
             for file in files:
                 path2file = parent + file
                 in_ext = '.' + path2file.split('.')[-1]
