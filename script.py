@@ -3,7 +3,7 @@ from functions import functions as f
 path = './input/test'
 output_folder = './output/converted'
 
-extension_in = ['tif']
+extension_in = ['tif', 'tiff']
 extension_out = 'png'
 file_suffix = ''
 iter_timer = 1

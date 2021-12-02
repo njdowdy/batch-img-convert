@@ -24,7 +24,7 @@ def count_files_to_process(path, extension_in=None):
     :return: returns the number of items that will be processed
     """
     if extension_in is None:
-        extension_in = ['.tif']  # default input extension
+        extension_in = ['.tif', '.tiff']  # default input extension
     i = 0
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -47,7 +47,7 @@ def convert_image_directory(path, extension_in=None, extension_out='.png', file_
     :return: does not return any value
     """
     if extension_in is None:
-        extension_in = ['.tif']  # default input extension
+        extension_in = ['.tif', '.tiff']  # default input extension
     if file_prefix:
         if file_prefix[-1] != '_':
             file_prefix = file_prefix + '_'
